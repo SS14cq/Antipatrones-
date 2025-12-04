@@ -1,41 +1,38 @@
 package Veterinaria;
 import java.util.Random;
-import java.util.Scanner;
 
 public abstract class Animal {
-    
-public enum padecimientos {
-    GRIPE, FRACTURA, INFECCION, OTRO
-}
+
+    public enum Padecimiento {
+        GRIPE, FRACTURA, INFECCION, OTRO
+    }
 
     protected String nombre, colorPelaje, comidaFavorita;
-    protected padecimientos padecimiento;
-    Scanner scanner = new Scanner(System.in);
+    protected Padecimiento padecimiento;
 
-    public abstract void registrarAnimal();
-    public abstract padecimientos revisarAnimal();
-    public abstract void tratarAnimal();
-
-    Animal(String nombre, String colorPelaje, String comidaFavorita) {
+    public Animal(String nombre, String colorPelaje, String comidaFavorita) {
         this.nombre = nombre;
         this.colorPelaje = colorPelaje;
         this.comidaFavorita = comidaFavorita;
         asignarPadecimientoAleatorio();
     }
-    
-    public void mostrarInfoBasica() {
 
+    public abstract void tratarAnimal();
+
+    public void mostrarInfoBasica() {
         System.out.println("\nNombre: " + nombre);
         System.out.println("Color de Pelaje: " + colorPelaje);
         System.out.println("Comida Favorita: " + comidaFavorita);
-        System.out.println("El animal presenta el siguiente padecimiento: " + padecimiento + "\n" );
+        System.out.println("Padecimiento: " + padecimiento + "\n");
     }
 
-
-    public void asignarPadecimientoAleatorio() {
+    private void asignarPadecimientoAleatorio() {
         Random random = new Random();
-        padecimientos[] valores = padecimientos.values();
+        Padecimiento[] valores = Padecimiento.values();
         this.padecimiento = valores[random.nextInt(valores.length)];
     }
 
+    public Padecimiento getPadecimiento() {
+        return padecimiento;
+    }
 }
